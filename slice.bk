@@ -1,0 +1,102 @@
+// package main
+
+// import (
+// 	"example/helper"
+// 	"fmt"
+// 	"strings"
+// 	"time"
+// )
+
+// var bookings = make([]UserData, 0)
+
+// type UserData struct {
+// 	firstName string
+// 	lastName  string
+// 	email     string
+// 	tickets   uint
+// }
+
+// func main() {
+// 	conferanceName := "Go Conference"
+
+// 	const conferanceTikets int = 50
+// 	var remainingTickets int = conferanceTikets
+// 	datanames := []string{"John Doe", "Jane Doe", "John Smith", "Jane Smith"}
+
+// 	fmt.Printf("conferenceTickets is %T, rmainingTickets is %T, conferenceName is %T \n", conferanceTikets, remainingTickets, conferanceName)
+// 	fmt.Printf("Welcome to %v booking application\n", conferanceName)
+// 	fmt.Printf("We have total of %v tickets and %v are still available.\n", conferanceTikets, remainingTickets)
+
+// 	// firstNames := []string{}
+// 	for _, booking := range datanames {
+// 		var names = strings.Fields(booking)
+// 		// firstNames = append(firstNames, names[0])
+
+// 		fmt.Printf("%s %s\n", helper.Greeting, names[1])
+
+// 		//var userData = make(map[string]string)
+// 		var userData = UserData{
+// 			firstName: names[0],
+// 			lastName:  names[1],
+// 			email:     names[0] + "." + names[1] + "@example.com",
+// 			tickets:   2,
+// 		}
+// 		remainingTickets = remainingTickets - int(userData.tickets)
+// 		fmt.Print("Remaining tickets are %v\n", remainingTickets)
+// 		// userData["firstName"] = names[0]
+// 		// userData["lastName"] = names[1]
+// 		// userData["email"] = names[0] + "." + names[1] + "@example.com"
+// 		// userData["tickets"] = strconv.FormatInt(2, 10)
+
+// 		bookings = append(bookings, userData)
+// 		sendTicket(userData)
+// 		fmt.Printf("User data is %v\n", userData)
+// 	}
+// 	fmt.Printf("Bookings are %v\n", bookings)
+// 	// fmt.Printf(("The first names of the bookings are %v\n"), firstNames)
+
+// 	if remainingTickets == 0 {
+// 		fmt.Println("Sorry, we are sold out!")
+// 		return
+// 	}
+// 	// for {
+
+// 	// 	var firstName string
+// 	// 	var lastName string
+// 	// 	var email string
+// 	// 	var userTickets int
+// 	// 	fmt.Println("Enter your first name")
+// 	// 	fmt.Scan(&firstName)
+
+// 	// 	fmt.Println("Enter your last name")
+// 	// 	fmt.Scan(&lastName)
+
+// 	// 	fmt.Println("Enter your email")
+// 	// 	fmt.Scan(&email)
+
+// 	// 	fmt.Println("Enter number of tickets you want to book")
+// 	// 	fmt.Scan(&userTickets)
+
+// 	// 	remainingTickets = remainingTickets - userTickets
+
+// 	// 	bookings = append(bookings, firstName+" "+lastName)
+
+// 	// 	fmt.Printf("Array length is %d\n", len(bookings))
+
+// 	// 	fmt.Printf("Thank you %s for booking %d tickets. You will receive a confirmation email at %s\n", bookings[0], userTickets, email)
+
+// 	// 	firstNames := []string{}
+// 	// 	for index, booking := range bookings {
+// 	// 		fmt
+// 	// 	}
+// 	// 	fmt.Printf("We have %d tickets remaining\n", remainingTickets)
+// 	// }
+// }
+
+// func sendTicket(user UserData) {
+// 	time.Sleep(10 * time.Second)
+// 	var ticket = fmt.Sprint("%d tickets sending ticket to %v\n", user.tickets, user.firstName)
+// 	fmt.Print("====================================\n")
+// 	fmt.Println(ticket)
+// 	fmt.Print("====================================\n")
+// }
