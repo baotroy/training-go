@@ -4,7 +4,6 @@ package main
 
 import (
 	"errors"
-	"example/cryp"
 	"fmt"
 	"strings"
 	"time"
@@ -59,16 +58,68 @@ func getNameCounts(names []string) map[rune]map[string]int {
 	return count
 }
 
-func main() {
-	start := time.Now()
-	for i := 0; i < 1; i++ {
+func count(thing string, c chan string) {
+	for i := 1; i < 5; i++ {
+		// fmt.Println(i, thing)
+		c <- thing
+		time.Sleep(time.Millisecond * 500)
+	}
+	close(c)
+}
 
-		const privateKey2 = ""
-		address := cryp.PrivateKeyToAddress(privateKey2)
-		fmt.Println(strings.ToLower(address.String()))
+func worker(jobs <-chan int, results chan<- int) {
+	for n := range jobs {
+		fmt.Println("Working on", n)
+		results <- fib(n)
+	}
+}
+
+func fib(n int) int {
+	if n <= 1 {
+		return n
+	}
+	return fib(n-1) + fib(n-2)
+}
+
+func main() {
+	const c = 20
+	jobs := make(chan int, c)
+	results := make(chan int, c)
+	start := time.Now()
+	go worker(jobs, results)
+
+	for i := 0; i < c; i++ {
+		fmt.Printf("Sending job %d\n", i)
+		jobs <- i
+	}
+	close(jobs)
+	fmt.Println("Jobs sent")
+	for j := 0; j < c; j++ {
+		fmt.Println(<-results)
 	}
 	elapsed := time.Since(start)
-	fmt.Printf("Time taken %s\n", elapsed)
+	fmt.Printf("time %d", elapsed)
+	// go count("sheep", c)
+
+	// for msg := range c {
+	// 	// msg, open := <-c
+	// 	// if !open {
+	// 	// 	break
+	// 	// }
+	// 	fmt.Println(msg)
+	// }
+	// go count("sheep")
+	// go count("cow")
+
+	// start := time.Now()
+	// for i := 0; i < 1; i++ {
+
+	// 	const privateKey2 = ""
+	// 	address := cryp.PrivateKeyToAddress(privateKey2)
+	// 	fmt.Println(strings.ToLower(address.String()))
+	// }
+	// elapsed := time.Since(start)
+	// fmt.Printf("Time taken %s\n", elapsed)
 
 	// fmt.Printf(`%s %d`, fromAddress, len(fromAddress))
 	// fmt.Print(helper.Greeting("abc"))
