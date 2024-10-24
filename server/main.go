@@ -32,7 +32,11 @@ func main() {
 		MaxAge:           300,
 	}))
 
-	// router.
+	v1Router := chi.NewRouter()
+	v1Router.HandleFunc("/ready", handlerReadiness)
+	v1Router.HandleFunc("/err", handlerErr)
+
+	rounter.Mount("/v1", v1Router)
 
 	server := &http.Server{
 		Handler: rounter,
